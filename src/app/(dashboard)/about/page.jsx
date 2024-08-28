@@ -1,3 +1,4 @@
+
 import AboutContent from '@/component/AboutContent';
 import Image from 'next/image';
 import React from 'react';
@@ -9,13 +10,24 @@ export const metadata = {
    keywords:['k','l','m']
  };
 
-const Aboutpage = () => {
+const  getTime=async()=>{
+    // const res=await fetch("http://localhost:3000/time",{cache:"no-store"})
+    const res=await fetch("http://localhost:3000/time",{next:{revalidate:5}})
+    const data=res.json()
+    return data
+}
+
+
+
+const Aboutpage =async () => {
+const currentTime=await getTime()
+console.log(currentTime.currentTime);
 
     return (
         <div>
             This is about page
             <AboutContent/>
-            <Image src="https://i.ibb.co/4Phssk0/Screenshot-2024-08-22-010252.png" height={1080} width={1920} alt="" />
+            <h2>Time: {currentTime.currentTime} </h2>
  
         </div>
     );
