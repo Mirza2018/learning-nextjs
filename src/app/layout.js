@@ -1,8 +1,9 @@
-import { Inter } from "next/font/google";
+import { Inter,Nerko_One } from "next/font/google";
 import "./globals.css";
 import Navber from "@/component/Navber";
 
 const inter = Inter({ subsets: ["latin"] });
+const nerko = Nerko_One({weight:["400"], subsets: ["latin"] });
 
 export const metadata = {
   title: {
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
 
     <html lang="en">
   
-      <body className={inter.className}>
+      <body className={nerko.className}>
         <Navber></Navber>
      
      
