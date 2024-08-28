@@ -2,6 +2,16 @@ import { getData, getSingleData } from '@/app/Services/postApi';
 import React from 'react';
 
 
+export const generateMetadata=async ({params})=>{
+    const post=await getSingleData(params.id)
+    return  { 
+        title:post.title,
+        description:post.body.split(" ")
+    
+    }
+}
+
+
 
 const post =async ({params}) => {
     // console.log(params);
