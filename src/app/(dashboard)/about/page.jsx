@@ -1,6 +1,7 @@
 
 import AboutContent from '@/component/AboutContent';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 import React from 'react';
 export const metadata = {
     title:{
@@ -19,6 +20,7 @@ const  getTime=async()=>{
 
 
 
+
 const Aboutpage =async () => {
 const currentTime=await getTime()
 console.log(currentTime.currentTime);
@@ -28,6 +30,7 @@ console.log(currentTime.currentTime);
             This is about page
             <AboutContent/>
             <h2>Time: {currentTime.currentTime} </h2>
+            <button  className='px-4 py-2 bg-red-400 rounded outline-none'>GO TO POSTS</button>
  
         </div>
     );

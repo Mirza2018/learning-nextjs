@@ -8,6 +8,17 @@ const nextConfig = {
           },
         ],
       },
+      async redirects() {
+        return [
+          // Basic redirect
+          // {
+          //   source: '/about',
+          //   destination: '/posts',
+          //   permanent: true,
+          // },
+     
+        ]
+      },
 };
 
 export default nextConfig;
