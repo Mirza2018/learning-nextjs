@@ -1,6 +1,8 @@
 import { getData } from '@/app/Services/postApi';
+import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import React from 'react';
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
 export const metadata = {
     title:"Posts",
@@ -14,6 +16,9 @@ export const metadata = {
 const PostsPage =async () => {
     const data= await getData()
 
+    const session=await getServerSession(authOptions)
+    console.log({session});
+    
     
     return (
         <div className='grid grid-cols-4'>

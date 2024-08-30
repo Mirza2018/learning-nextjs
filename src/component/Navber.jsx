@@ -1,4 +1,5 @@
 "use client"
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import React from 'react';
@@ -6,9 +7,11 @@ import React from 'react';
 const Navber = () => {
   const pathName=usePathname()
   const navigate=useRouter()
+  const session=useSession()
+console.log(session);
 
 const handleClick=()=>{
-  navigate.push('/login')
+  navigate.push('/api/auth/signin')
 }
 
   
@@ -51,7 +54,10 @@ const handleClick=()=>{
           links.map(link=><Link className={`${link.path ===pathName && "text-cyan-400"}`} key={link.path} href={link.path}>{link.title}</Link>)
         }
       </li>
-      <button onClick={handleClick} className="px-4 py-1 rounded mx-2  bg-teal-500  hover:bg-teal-600 ">Login</button>
+      {
+        session.status==="authenticated" ? <button onClick={handleClick} className="px-4 py-1 rounded mx-2  bg-teal-500  hover:bg-teal-600 ">LogOut</button> :  <button onClick={handleClick} className="px-4 py-1 rounded mx-2  bg-teal-500  hover:bg-teal-600 ">Login</button>
+      }
+      
       
     </ul>
   </nav>

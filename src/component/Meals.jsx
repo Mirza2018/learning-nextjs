@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 
 const Meals = () => {
-    const [search,setSearch]=useState('a')
+    const [search,setSearch]=useState('')
     const [meals,setMeals]=useState([])
 
 //   mealsData(search,setMeals)

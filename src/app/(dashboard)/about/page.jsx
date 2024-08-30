@@ -31,7 +31,7 @@ console.log(currentTime.currentTime);
             <AboutContent/>
             <h2>Time: {currentTime.currentTime} </h2>
             <button  className='px-4 py-2 bg-red-400 rounded outline-none'>GO TO POSTS</button>
- 
+
         </div>
     );
 };

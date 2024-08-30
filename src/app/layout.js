@@ -1,6 +1,7 @@
 import { Inter,Nerko_One } from "next/font/google";
 import "./globals.css";
 import Navber from "@/component/Navber";
+import AuthProvider from "./Services/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const nerko = Nerko_One({weight:["400"], subsets: ["latin"] });
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
 
     <html lang="en">
-  
+  <AuthProvider>
       <body className={nerko.className}>
         <Navber></Navber>
      
@@ -32,7 +33,8 @@ export default function RootLayout({ children }) {
       </footer>
         
         </body>
-   
+      </AuthProvider>
     </html>
+ 
   );
 }
