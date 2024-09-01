@@ -1,5 +1,7 @@
+import connectDB from "@/app/Services/mongoDB";
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export let authOptions={
     secret:process.env.NEXT_PUBLIC_AUTH_SECRET,
@@ -17,7 +19,7 @@ export let authOptions={
                     required:true,
                      placeholder:"Type Your Email"},
     
-       password:{
+               password:{
                     lable:"User Password",type:"password",
                     required:true, placeholder:"Type Your Password"}
             },
@@ -28,7 +30,12 @@ export let authOptions={
             }
 
             if(email){
-                const checkEmail=users.find(u=>u.email===email)
+                // const checkEmail=users.find(u=>u.email===email)
+                const db= await connectDB()
+                const checkEmail=await db.collection('users').findOne({email})
+
+console.log(checkEmail);
+
                 if(checkEmail){
                if(checkEmail.password===password){
                 return checkEmail
@@ -40,6 +47,11 @@ export let authOptions={
             return false;
         }
         })
+        ,
+        GoogleProvider({
+            clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+            clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
+          })
     ],
     callbacks:{
         async jwt({account,token,user}){

@@ -1,5 +1,6 @@
 "use client"
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import React from 'react';
@@ -8,7 +9,7 @@ const Navber = () => {
   const pathName=usePathname()
   const navigate=useRouter()
   const session=useSession()
-console.log(session);
+// console.log(session.data?.user?.image);
 
 const handleClick=()=>{
   navigate.push('/api/auth/signin')
@@ -44,6 +45,10 @@ const handleClick=()=>{
       title:"Blogs",
       path:"/blog"
     },
+    {
+      title:"Sign up",
+      path:"/api/auth/signup"
+    },
   ]
   return (
     <nav className="px-6 py-4 flex justify-between items-center bg-red-600 text-white">
@@ -55,7 +60,24 @@ const handleClick=()=>{
         }
       </li>
       {
-        session.status==="authenticated" ? <button onClick={handleClick} className="px-4 py-1 rounded mx-2  bg-teal-500  hover:bg-teal-600 ">LogOut</button> :  <button onClick={handleClick} className="px-4 py-1 rounded mx-2  bg-teal-500  hover:bg-teal-600 ">Login</button>
+        session.status==="authenticated" ? <>
+        <div className='flex gap-3 mx-3'>
+            <h4>{session?.data?.user?.name}</h4>
+        <Image 
+        className='rounded object-contain  mx-2 '
+        height={10}
+        width={25}
+        alt={session?.data?.user?.name}
+        src={session?.data?.user?.image}
+        />
+      
+        </div>
+        
+
+        
+        <button onClick={signOut} className="px-4 py-1 rounded mx-2  bg-teal-500  hover:bg-teal-600 ">LogOut</button>
+        
+        </> :  <button onClick={handleClick} className="px-4 py-1 rounded mx-2  bg-teal-500  hover:bg-teal-600 ">Login</button>
       }
       
       
